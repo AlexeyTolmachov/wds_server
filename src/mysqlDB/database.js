@@ -14,7 +14,7 @@ db.connect((err) => {
 		console.log('Connected to database MySQL');
 
 		const createTableQuery = `
-      CREATE TABLE IF NOT EXISTS reviews (
+      CREATE TABLE IF NOT EXISTS testimonials (
         id INT AUTO_INCREMENT PRIMARY KEY,
         reviewer VARCHAR(255) NOT NULL,
         email VARCHAR(255) NOT NULL,
