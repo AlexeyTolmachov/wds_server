@@ -34,5 +34,5 @@ async function importDataFromCSV(filePath) {
 	}
 }
 
-const csvFilePath = '../reviews-small.csv';
+const csvFilePath = '../reviews.csv';
 importDataFromCSV(csvFilePath);
