@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const testimonialsRoutes = require('./routes/testimonialsRoutes');
 const adminRouter = require('./routes/adminRouter')
 const app = express();
-
 const allowedOrigins = ['http://localhost:3000'];
 
 app.use(cors({
@@ -18,5 +17,5 @@ app.use(cors({
 }));
 app.use(bodyParser.json());
 app.use('/api/testimonials', testimonialsRoutes);
-app.use('/api/', adminRouter);
+app.use('/api/admin', adminRouter);
 module.exports = app;
