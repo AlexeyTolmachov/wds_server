@@ -23,10 +23,12 @@ CREATE TABLE IF NOT EXISTS testimonials (
   employee VARCHAR(255),
   employee_position VARCHAR(255) DEFAULT NULL, 
   unique_employee_number VARCHAR(255),
-  company VARCHAR(255),
-  company_description TEXT
+  CompanyId INT, 
+  company_description TEXT,
+  FOREIGN KEY (CompanyId) REFERENCES companies(id)
 )
 `;
+
 
 		const createTableUsersQuery = `
       CREATE TABLE IF NOT EXISTS users (
@@ -38,6 +40,20 @@ CREATE TABLE IF NOT EXISTS testimonials (
       )
     `;
 
+		const createTableCompaniesQuery = `
+CREATE TABLE IF NOT EXISTS companies (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  description TEXT
+)
+`;
+		db.query(createTableCompaniesQuery, (err, results) => {
+			if (err) {
+				console.error('Error creating "companies" table:', err);
+			} else {
+				console.log('The "companies" table has been created or already exists');
+			}
+		});
 
 		db.query(createTableQuery, (err, results) => {
 			if (err) {
