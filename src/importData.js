@@ -11,17 +11,12 @@ async function importDataFromCSV(filePath) {
 		fs.createReadStream(filePath)
 			.pipe(csv())
 			.on('data', async (row) => {
-				// Перевірка наявності запису з таким унікальним номером працівника
 				const existingRecord = await db.promise().query(
 					'SELECT * FROM testimonials WHERE unique_employee_number = ?',
 					[row.Unique_employee_number]
 				);
-
 				if (existingRecord[0].length === 0) {
-					// Пошук або створення компанії
 					const companyId = await Company.findOrCreate(row.Company, row["Company description"]);
-
-					// Вставка нового запису відгуку
 					await db.promise().query(
 						'INSERT INTO testimonials (Reviewer, Email, Review, Rating, Employee, employee_position, Unique_employee_number, CompanyId) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
 						[
